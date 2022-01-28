@@ -94,7 +94,7 @@ class ProfileImageController extends Controller
      */
     public function edit(ProfileImage $profileImage)
     {
-        //
+        return view('profileimage.edit',['profileImage'=> $profileImage]);
     }
 
     /**
@@ -104,9 +104,35 @@ class ProfileImageController extends Controller
      * @param  \App\Models\ProfileImage  $profileImage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileImageRequest $request, ProfileImage $profileImage)
+    public function update(Request $request, ProfileImage $profileImage)
     {
-        //
+
+
+        //jeigu file yra tuscias - duombazeje nieko nedarom
+        //kitu atveju jei pasirinkome nauja paveiksliuka
+
+
+
+
+        // if(isset($_POST['image_src]) $$ !empty($_POST['image_src]) ))
+
+        if($request->has('image_src')) {
+            $imageName = 'image' . time().'.'.$request->image_src->extension();
+            $request->image_src->move(public_path('images') , $imageName);
+            $profileImage->src = $imageName;
+        }
+        
+        $profileImage->alt = $request->image_alt;
+        $profileImage->width = $request->image_width;
+        $profileImage->height = $request->image_height;
+        $profileImage->class = $request->image_class;
+
+        
+        
+        $profileImage->save();
+
+        // 
+        return 0;
     }
 
     /**
