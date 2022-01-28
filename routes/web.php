@@ -25,7 +25,7 @@ Route::prefix('profileimages')->group(function() {
 
     // Route::get('', 'App\Http\Controllers\StudentController@index')->name('student.index');
     Route::get('create', 'App\Http\Controllers\ProfileImageController@create')->name('profileimage.create');
-    // Route::post('store', 'App\Http\Controllers\StudentController@store' )->name('student.store');
+    Route::post('store', 'App\Http\Controllers\ProfileImageController@store' )->name('profileimage.store');
     // Route::get('edit/{student}', 'App\Http\Controllers\StudentController@edit')->name('student.edit');
     // Route::post('update/{student}', 'App\Http\Controllers\StudentController@update')->name('student.update');
     // Route::post('destroy/{company}', 'App\Http\Controllers\CompanyController@destroy' )->name('company.destroy');

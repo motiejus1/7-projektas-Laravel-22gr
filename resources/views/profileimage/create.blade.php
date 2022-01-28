@@ -8,7 +8,7 @@
                     <div class="card-header">Profile Image</div>
     
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="{{route('profileimage.store')}}" enctype="multipart/form-data">
                             @csrf
     
                             <div class="row mb-3">
@@ -21,10 +21,10 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="image_src" class="col-md-4 col-form-label text-md-end">Image Src</label>
+                                <label for="image_src" class="col-md-4 col-form-label text-md-end">Image</label>
     
                                 <div class="col-md-6">
-                                    <input id="image_src" type="text" class="form-control" name="image_src" required autofocus>
+                                    <input id="image_src" type="file" class="form-control" name="image_src" required autofocus>
     
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <label for="image_width" class="col-md-4 col-form-label text-md-end">Image Width</label>
     
                                 <div class="col-md-6">
-                                    <input id="image_width" type="text" class="form-control" name="image_width" required autofocus>
+                                    <input id="image_width" type="number" min="0" max="200" step="10" class="form-control" name="image_width" required autofocus>
     
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <label for="image_height" class="col-md-4 col-form-label text-md-end">Image Height</label>
     
                                 <div class="col-md-6">
-                                    <input id="image_height" type="text" class="form-control" name="image_height" required autofocus>
+                                    <input id="image_height" type="number" min="0" max="200" step="10" class="form-control" name="image_height" required autofocus>
     
                                 </div>
                             </div>

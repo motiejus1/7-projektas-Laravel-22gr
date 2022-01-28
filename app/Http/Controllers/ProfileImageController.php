@@ -6,6 +6,8 @@ use App\Models\ProfileImage;
 use App\Http\Requests\StoreProfileImageRequest;
 use App\Http\Requests\UpdateProfileImageRequest;
 
+use Illuminate\Http\Request;
+
 class ProfileImageController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class ProfileImageController extends Controller
      */
     public function index()
     {
-        //
+        $profileImages = ProfileImage::all();
+        return view('profileimage.index', ['profileImages' => $profileImages]);
     }
 
     /**
@@ -34,9 +37,42 @@ class ProfileImageController extends Controller
      * @param  \App\Http\Requests\StoreProfileImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProfileImageRequest $request)
+    public function store(Request $request)
     {
-        //
+        $profileImage = new ProfileImage;
+
+        $profileImage->alt = $request->image_alt;
+
+        //time(); //string - tekstas, 12544353531 - timestamp
+
+        $imageName = 'image' . time().'.'.$request->image_src->extension();
+
+        $request->image_src->move(public_path('images') , $imageName);
+
+        $profileImage->src = $imageName;
+        //paveiksliukas.docx
+        // $imageName = image1245157451354.docx
+
+
+        //pacio paveiksliu patalpinimas i serveri ir jo pavadinimo pasiemimas/sudarymas, kelio irasymas i duomenu baze
+        
+        //paveiksliukai/ aplankas
+
+        //paveiksliukas.jpg
+        //paveiksliukas.png 
+        //paveiksliukas.png
+
+        //paveiksliukas24135.png
+        //paveiksliukas21251.png
+
+        $profileImage->width = $request->image_width;
+        $profileImage->height = $request->image_height;
+        $profileImage->class = $request->image_class;
+
+        $profileImage->save();
+
+        // 
+        return 0;
     }
 
     /**
